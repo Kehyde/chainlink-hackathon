@@ -1,0 +1,21 @@
+
+# Dependencies
+node_modules/
+
+# Solidity libraries (pulled via forge install)
+lib/
+
+# Environment
+.env
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# CRE build artifacts
+*.wasm
+tmp.js

@@ -1,0 +1,58 @@
+========================================================================================================================
+The following instructions list what JSON input the CRE workflow will accept.
+
+RiskPayLoad Input 
+
+--- Structure of JSON ---
+{"mode": "manual", "pegDeviation": number (0.02), "tbillYieldDelta": number (0.01), "custodianConcentration": number (0.4)}
+
+--- Latest example ---
+
+(Low Risk Analysis)
+{"mode": "manual", "pegDeviation": 0.01, "tbillYieldDelta": 0.01, "custodianConcentration": 0.4}
+
+(Mild Stress Analysis)
+{"mode": "manual", "pegDeviation": 0.02, "tbillYieldDelta": 0.05, "custodianConcentration": 0.5}
+
+(High Stress Analysis)
+{"mode": "manual", "pegDeviation": 0.04, "tbillYieldDelta": 0.08, "custodianConcentration": 0.6}
+
+==========================================================================================================================
+
+documentation to add to the readme:
+
+I'm switching from POR freshness and pivoting to market-based liquidity + price change
+to better fit todays current technology.
+
+====================
+Currently my liquidity fetch from dexscreener only represents a single token pair on one DEX (UNISWAP: USDC/USDT)
+not the full market liquidity of USDC. This is limiting because:
+Only liquidity from one DEX accounted for,
+CEX's are NOT accounted for,
+Only one pair not (USDC/ETH, USDC/DAI),
+Only one chain is being accounted for (ETH),
+Cross-chain liquidity is not accounted for.
+
+Future plans to improve:
+Aggregate multiple pairs,
+Cross-chain aggregation,
+Include CEX's
+Normalize liquidity relative to peg deviation (Low liquidity + off-peg = more dangerous than low liquidity + peg intact.)
+====================
+
+
+====================
+--- Ideas to incorporate in the future --- 
+
+I would like to incorporate Coinbase's x402 solution to my project...
+First sketch: AI agent calls my endpoint with a post request of a tokenAddress and chainId, activates a HTTP Trigger, and has to pay a x402 fee before getting my oracle output from my smart contract.
+**Does this take my idea away from stablecoins??**
+**Does this make my product generalized??**
+**Can I keep it directly tied to stablecoins?? Perhaps once POR's get better in the future.**
+====================
+
+forge create src/riskOracle.sol:RiskOracle \
+  --rpc-url "https://ethereum-sepolia-rpc.publicnode.com" \
+  --private-key $CRE_ETH_PRIVATE_KEY \
+  --broadcast \
+  --constructor-args 0x15fc6ae953e024d975e77382eeec56a9101f9f88

@@ -1,0 +1,10 @@
+{
+  "evms": [
+    {
+      "oracleAddress": "0x54A0174D161F0555632279bc15Fee63ECe511bbd",
+      "chainSelectorName": "ethereum-testnet-sepolia",
+      "gasLimit": "500000"
+    }
+  ],
+  "tokenAddress": "0xf08A50178dfcDe18524640EA6618a1f965821715"
+}
